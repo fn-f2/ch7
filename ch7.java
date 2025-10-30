@@ -6,22 +6,28 @@ public class ch7
     
     public static void main(String[] args)
     {
-        System.out.println(indexOfMax(new int[]{-1, -2, 5, -2}));
-        System.out.println(indexOfMax(new int[]{}));
+        //System.out.println(indexOfMax(new int[]{-1, -2, 5, -2}));
+        //System.out.println(indexOfMax(new int[]{}));
         
-        System.out.println("sieve of 50:");
-        for (int i = 0; i < sieve(50).length; i++)
+        System.out.println("sieve of 120:");
+        for (int i = 0; i < sieve(120).length; i++)
         {
-            if (sieve(50)[i]) System.out.println("" + i + " is prime");
-            else System.out.println("" + i + " is composite");
+            if (sieve(120)[i]) System.out.println("" + i + " is prime");
+            else System.out.println("" + i + " is NOT PRIME " + randomName());
         }
          
-        System.out.println(areFactors(2, new int[] {2, 4, 6, 16}));        
+        /*System.out.println(areFactors(2, new int[] {2, 4, 6, 16}));        
         System.out.println(areFactors(2, new int[] {2, 4, 7, 16}));       
         System.out.println(areFactors(1, new int[] {}));     
-        System.out.println(areFactors(0, new int[] {}));
+        System.out.println(areFactors(0, new int[] {}));*/
         
-        System.out.println(arePrimeFactors(6, new int[] {3, 2}));
+        //System.out.println(arePrimeFactors(6, new int[] {3, 2}));
+        //System.out.println(arePrimeFactors(2, new int[] {3, 2}));
+        //System.out.println(arePrimeFactors(60, new int[] {30, 2}));
+        //System.out.println(arePrimeFactors(60, new int[] {5, 2, 3, 2, 1}));
+        
+        //System.out.println(arePrimeFactors(1, new int[] {1, 1}));
+        //System.out.println(arePrimeFactors(0, new int[] {0, 1}));
     }
     
     public static int indexOfMax(int[] arr)
@@ -40,9 +46,9 @@ public class ch7
         for (int i = 2; i < n; i++)
         {
             ans[i] = true;
-            for (int i2 = 2; i2 <= Math.sqrt(i); i2++)
+            for (int i2 = 2; i2 < i; i2++)
             {
-                if (i2 != i && i % i2 == 0)
+                if (i % i2 == 0)
                 {
                     ans[i] = false;
                     break;
@@ -65,18 +71,45 @@ public class ch7
     
     public static boolean arePrimeFactors(int n, int[] nums)
     {
-        boolean[] numsp = sieve(n);
+        boolean[] numsp = sieve(n+1);
         int prod = 1;
         
         for (int i = 0; i < nums.length; i++)
         {
-            if (!numsp[nums[i]+1]) return false;
+            if (numsp[nums[i]] == false) return false;
+            System.out.println("hi " + nums[i] + numsp[nums[i]]);
             prod *= nums[i];
-            System.out.println("A" + prod + n);
         }
         
-        System.out.println("" + prod + n);
+        System.out.println("number: " + n + " product: " + prod);
         return (prod == n);
+    }
+    
+    public static String randomName()
+    {
+        String vowels = "aeiouy";
+        String consonants = "qwrtypsdfghjklzxcvbnm";
+        String name = "";
+        
+        int c = (int) (Math.random()*20) + 1;
+        name += consonants.substring(c, c+1).toUpperCase();
+        
+        int v = (int) (Math.random()*5) + 1;
+        name += vowels.substring(v, v+1);
+        
+        c = (int) (Math.random()*20) + 1;
+        name += consonants.substring(c, c+1);
+        
+        c = (int) (Math.random()*20) + 1;
+        name += consonants.substring(c, c+1);
+        
+        v = (int) (Math.random()*5) + 1;
+        name += vowels.substring(v, v+1);
+        
+        c = (int) (Math.random()*20) + 1;
+        name += consonants.substring(c, c+1);
+        
+        return name;
     }
 }
 
