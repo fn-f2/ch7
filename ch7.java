@@ -85,6 +85,19 @@ public class ch7
         return (prod == n);
     }
     
+    public static int[] letterHist (String text)
+    {
+        int[] counts = new int[26];
+        text = text.toLowerCase();
+        
+        for (int i = 0; i < text.length(); i++) { 
+            char letter = text.charAt(i);
+            int index = letter - 'a';
+            counts[index]++;
+        }
+        return counts;
+    }
+    
     public static String randomName()
     {
         String vowels = "aeiouy";
